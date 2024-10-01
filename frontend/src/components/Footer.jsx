@@ -1,7 +1,7 @@
 const Footer = () => (
-    <footer className="bg-dark text-light p-6 text-center">
-      <p>Technology Created by Agus Salman | Web Design ©2022</p>
-      <p>Supported by A-Space</p>
+    <footer className="bg-black text-light p-6 text-center">
+      <p>WebPage Created by Senura Nisal| Bounce ©2024</p>
+      <p>Supported by NASA API</p>
     </footer>
   );
 
