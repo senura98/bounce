@@ -1,14 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
-const MissionCard = ({
-  title,
-  subtitle,
-  description,
-  imageSrc,
-  imageAlt,
-  imagePosition = 'left', 
-}) => {
+const MissionCard = ({ title, subtitle, description, imageSrc, imageAlt, imagePosition = 'left', navigateTo }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(navigateTo);  // Navigate to the specific route
+  };
 
   const isImageLeft = imagePosition === 'left';
 
@@ -18,7 +17,8 @@ const MissionCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       viewport={{ once: true }}
-      className="p-10 bg-dark text-light flex flex-col md:flex-row "
+      className="p-10 bg-dark text-light flex flex-col md:flex-row items-center cursor-pointer"
+      onClick={handleCardClick}  // Handle click to navigate
     >
       {isImageLeft && (
         <div className="w-full md:w-1/2">
