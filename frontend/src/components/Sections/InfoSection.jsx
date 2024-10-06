@@ -13,7 +13,7 @@ const InfoSection = () => {
           title="LEO" 
           subtitle="300-1500 KM" 
           description="Low Earth Orbit" 
-          apiUrl="http://localhost:8080/api/info/apod" 
+          apiUrl="http://localhost:8080/apod/get-info" 
         />
 
         <InfoCard 

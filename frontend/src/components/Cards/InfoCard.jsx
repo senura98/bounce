@@ -13,12 +13,12 @@ const InfoCard = ({ title, subtitle, description, apiUrl }) => {
 
   // Open the modal immediately and show spinner, then load the content
   const openModal = async () => {
-    setIsModalOpen(true);  // Open modal immediately
-    setLoading(true);  // Start loading media
+    setIsModalOpen(true);  
+    setLoading(true); 
     
     try {
-      const response = await axios.get(apiUrl);  // Fetch from the provided API URL
-      const { url, media_type, explanation, title } = response.data;  // Destructure the media type, description, and title
+      const response = await axios.get(apiUrl); 
+      const { url, media_type, explanation, title } = response.data; 
 
       setMediaUrl(url);  // Set the media URL (image or video)
       setMediaType(media_type);  // Set the media type (image or video)

@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-
-// Register the chart components for Chart.js
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+import { useNavigate } from 'react-router-dom';  // Import useNavigate for navigation
+import MarsWeatherChart from '../components/Subcomponents/MarsWeatherChart';
+import MarsSolCards from '../components/Cards/MarsSolCards';
+import MarsIcon from '../assets/marsIcon.svg';  // Import your SVG file
 
 const MarsRoverDetail = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [chartData, setChartData] = useState(null);
+  const navigate = useNavigate();  // Hook to navigate back to home page
 
   useEffect(() => {
-    // Fetch Mars weather data from InSight API
+    // Fetch Mars weather data from the backend API
     const fetchWeatherData = async () => {
       try {
-        const response = await axios.get('https://api.nasa.gov/insight_weather/?api_key=YOUR_NASA_API_KEY&feedtype=json&ver=1.0');
-        setWeatherData(response.data);
-        prepareChartData(response.data);
+        const response = await axios.get('http://localhost:8080/mars-weather/get-weather');  // Use your API endpoint
+        setWeatherData(response.data);  // Update the weather data state
+        prepareChartData(response.data);  // Prepare data for the chart
       } catch (error) {
         console.error('Error fetching weather data:', error);
       }
@@ -25,21 +25,28 @@ const MarsRoverDetail = () => {
     fetchWeatherData();
   }, []);
 
+  // Prepare chart data from the fetched weather data
   const prepareChartData = (data) => {
-    const sols = Object.keys(data.sol_keys);  // Get sol keys
-
-    const temperatures = sols.map((sol) => data[sol].AT.avg);  // Get average temperature for each sol
-    const labels = sols.map((sol) => `Sol ${sol}`);  // Set the labels for the chart
+    const labels = data.map((solData) => `Sol ${solData.sol}`);  // Create labels like "Sol 675", "Sol 676", etc.
+    const highTemperatures = data.map((solData) => solData.highTemp);  // Extract high temperatures for each sol
+    const lowTemperatures = data.map((solData) => solData.lowTemp);    // Extract low temperatures for each sol
 
     const chartData = {
       labels,
       datasets: [
         {
-          label: 'Avg Temperature (°F)',
-          data: temperatures,
-          fill: false,
-          backgroundColor: 'rgb(75, 192, 192)',
-          borderColor: 'rgba(75, 192, 192, 0.2)',
+          label: 'High Temp (°F)',
+          data: highTemperatures,
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',  // Bar color for high temperatures
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+        },
+        {
+          label: 'Low Temp (°F)',
+          data: lowTemperatures,
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',  // Bar color for low temperatures
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
         },
       ],
     };
@@ -47,58 +54,52 @@ const MarsRoverDetail = () => {
   };
 
   if (!weatherData || !chartData) {
-    return <div>Loading Mars weather data...</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-dark text-light">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-500"></div> {/* Spinner */}
+      </div>
+    ); // Show a loading message if the data hasn't loaded yet
   }
 
   return (
     <section className="p-10 bg-dark text-light min-h-screen">
       <div className="max-w-7xl mx-auto">
-        {/* Top Section: Description on the left and Chart on the right */}
+        <div className="flex justify-between items-center mb-10">
+          {/* Left: Title and Icon */}
+          <div className="flex items-center">
+            <h1 className="text-5xl font-bold">Mars Weather</h1>
+            <img src={MarsIcon} alt="Mars Icon" className="ml-4 w-8 h-8" /> {/* SVG next to title */}
+          </div>
+
+          {/* Right: Back Button */}
+          <button
+            className="bg-primary text-dark font-semibold py-2 px-4 rounded-lg hover:bg-accent"
+            onClick={() => navigate('/')}  // Navigate back to home page
+          >
+            Back to Home
+          </button>
+        </div>
+
         <div className="flex flex-col md:flex-row justify-between items-start mb-10">
           {/* Left: Description */}
           <div className="md:w-1/2">
-            <h1 className="text-5xl font-bold">Mars Weather</h1>
             <p className="mt-4 text-lg">
               NASA's InSight lander is providing daily weather updates from Elysium Planitia, a flat, smooth plain on Mars.
               The weather includes daily high and low temperatures, wind speeds, and atmospheric pressure. The weather data
-              is captured for each sol, the Martian day, which is about 24 hours and 39 minutes.
+              is captured for each sol, the Martian day, which is about 24 hours and 39 minutes. <br/><br/>
+              InSight's advanced sensors measure seismic activity, air pressure, and magnetic fields, providing crucial data
+              to understand Martian climate patterns. This data helps scientists learn more about the planet's atmosphere
+              and its evolution over time.<br/><br/>
+              The temperature on Mars varies dramatically between day and night, often swinging from a high of -10°F to a low of -100°F.
             </p>
           </div>
 
           {/* Right: Weather Graph */}
-          <div className="md:w-1/2 mt-8 md:mt-0">
-            <Line
-              data={chartData}
-              options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'top',
-                  },
-                  title: {
-                    display: true,
-                    text: 'Mars Average Temperature Over Time',
-                  },
-                },
-              }}
-            />
-          </div>
+          <MarsWeatherChart chartData={chartData} />
         </div>
 
         {/* Cards Section: Show weather data for different sols */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {Object.keys(weatherData.sol_keys).map((solKey) => {
-            const sol = weatherData[solKey];
-            return (
-              <div key={solKey} className="bg-gray-700 p-4 rounded-lg text-center shadow-lg">
-                <h3 className="text-2xl font-bold">Sol {solKey}</h3>
-                <p>Date: {sol.First_UTC.split('T')[0]}</p>
-                <p>High: {sol.AT.max ? `${sol.AT.max}°F` : 'N/A'}</p>
-                <p>Low: {sol.AT.min ? `${sol.AT.min}°F` : 'N/A'}</p>
-              </div>
-            );
-          })}
-        </div>
+        <MarsSolCards weatherData={weatherData} />
       </div>
     </section>
   );

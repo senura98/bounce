@@ -3,6 +3,6 @@ import { getApod } from '../controllers/infoController.js';
 
 const router = express.Router();
 
-router.get('/apod', getApod); 
+router.get('/get-info', getApod); 
 
 export default router;  

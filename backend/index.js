@@ -1,9 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { errorHandler } from "./src/utils/errorHandling.js";
-import router from './src/routes/inforoutes.js'; // Import router, not infoRoutes
-
-
+import indexRouter from './src/routes/index.js'; // Import router, not infoRoutes
 
 const app = express();
 
@@ -13,8 +11,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Use the correct name for the router, which is `router`
-app.use('/api/info', router);
+
+app.use("/", indexRouter);
+
 
 app.use(errorHandler);
 
