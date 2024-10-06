@@ -19,7 +19,7 @@ const MissionSection = () => (
       />
       <MissionCard
         title="EXPLORATION"
-        subtitle="MARS ROVER"
+        subtitle="MARS WEATHER"
         description="Discovering the secrets of the Red Planet and searching for signs of ancient life..."
         imageSrc={marsbackgroundImage}
         imageAlt="Mars Rover"

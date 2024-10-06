@@ -14,7 +14,7 @@ const MarsRoverDetail = () => {
     // Fetch Mars weather data from the backend API
     const fetchWeatherData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/mars-weather/get-weather');  // Use your API endpoint
+        const response = await axios.get('https://bounce-backend-d9ms.onrender.com/mars-weather/get-weather');  // Use your API endpoint
         setWeatherData(response.data);  // Update the weather data state
         prepareChartData(response.data);  // Prepare data for the chart
       } catch (error) {
