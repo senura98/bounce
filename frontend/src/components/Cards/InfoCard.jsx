@@ -7,8 +7,8 @@ const InfoCard = ({ title, subtitle, description, apiUrl }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mediaType, setMediaType] = useState(null);
   const [mediaUrl, setMediaUrl] = useState(null);
-  const [mediaDescription, setMediaDescription] = useState(''); // Store media description
-  const [mediaTitle, setMediaTitle] = useState(''); // Store media title
+  const [mediaDescription, setMediaDescription] = useState(''); 
+  const [mediaTitle, setMediaTitle] = useState(''); 
   const [loading, setLoading] = useState(false); // Loading state
 
   // Open the modal immediately and show spinner, then load the content
@@ -20,10 +20,10 @@ const InfoCard = ({ title, subtitle, description, apiUrl }) => {
       const response = await axios.get(apiUrl); 
       const { url, media_type, explanation, title } = response.data; 
 
-      setMediaUrl(url);  // Set the media URL (image or video)
-      setMediaType(media_type);  // Set the media type (image or video)
-      setMediaDescription(explanation);  // Set the media description
-      setMediaTitle(title);  // Set the media title
+      setMediaUrl(url); 
+      setMediaType(media_type); 
+      setMediaDescription(explanation);  
+      setMediaTitle(title);  
     } catch (error) {
       console.error('Failed to fetch the media:', error);
     } finally {
