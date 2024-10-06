@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const API_BASE_URL = 'https://api.nasa.gov';
+// const API_KEY = process.env.NASA_API_KEY; 
 const API_KEY = 'fyf1ybkNB6s8jpQBvts6Tf27IoijgaR4O0PHrkDD';  
 
 
