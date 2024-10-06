@@ -1,5 +1,7 @@
 import MissionCard from "../Cards/MissionCard";
-import SectionHeader from "../Subcomponents/SectionHeader";  // Import SectionHeader
+import SectionHeader from "../Subcomponents/SectionHeader"; 
+import backgroundImage from '../../assets/satellite.jpg'; 
+import marsbackgroundImage from '../../assets/mars.jpg'; 
 
 const MissionSection = () => (
   <section className="p-10">
@@ -10,16 +12,16 @@ const MissionSection = () => (
         title="OUR MISSION"
         subtitle="RAPIDSCAT"
         description="Improve weather forecasting on Earth, provide cross-calibration for all international satellites..."
-        imageSrc="/assets/satellite.jpg"
+        imageSrc={backgroundImage}
         imageAlt="Satellite"
         imagePosition="left"
-        navigateTo="/mission/rapidscat"  // Navigate to RAPIDSCAT detail page
+        navigateTo="/mission/rapidscat"  
       />
       <MissionCard
         title="EXPLORATION"
         subtitle="MARS ROVER"
         description="Discovering the secrets of the Red Planet and searching for signs of ancient life..."
-        imageSrc="/assets/mars-rover.jpg"
+        imageSrc={marsbackgroundImage}
         imageAlt="Mars Rover"
         imagePosition="right"
         navigateTo="/mission/mars-rover"  // Navigate to MARS ROVER detail page
