@@ -8,8 +8,13 @@ const app = express();
 const port = process.env.PORT || 8080
 
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Use environment variable or local frontend
-    optionsSuccessStatus: 200 
+    origin: (origin, callback) => {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
   };
 
 app.use(cors(corsOptions));
