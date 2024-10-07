@@ -7,6 +7,7 @@ const app = express();
 
 const port = process.env.PORT || 8080
 
+const allowedOrigins = ['http://localhost:5173', 'https://your-production-frontend-domain.com'];
 const corsOptions = {
     origin: (origin, callback) => {
       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
