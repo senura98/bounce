@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate for navigation
-import Marschart from '/src/components/subcomponents/Marschart.jsx';
+import Marschart from '../subcomponents/Marschart.jsx';
 import MarsSolCards from '../cards/MarsSolCards';
 import MarsIcon from '../assets/marsIcon.svg';  // Import your SVG file
 
