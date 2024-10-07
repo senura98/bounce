@@ -2,8 +2,8 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Hero from '../components/Hero';
 import NavBar from '../components/Hero';
-import InfoSection from '../components/Sections/InfoSection';
-import MissionSection from '../components/Sections/MissionSection';
+import InfoSection from '../Sections/InfoSection';
+import MissionSection from '../Sections/MissionSection';
 import Footer from '../components/Footer';
 
 const Home = () => {
