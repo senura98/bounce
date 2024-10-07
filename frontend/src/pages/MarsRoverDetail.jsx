@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate for navigation
-import MarsWeatherChart from '../components/subcomponents/Marschart';
+import Marschart from '../components/subcomponents/Marschart';
 import MarsSolCards from '../components/Cards/MarsSolCards';
 import MarsIcon from '../assets/marsIcon.svg';  // Import your SVG file
 
@@ -95,7 +95,7 @@ const MarsRoverDetail = () => {
           </div>
 
           {/* Right: Weather Graph */}
-          <MarsWeatherChart chartData={chartData} />
+          <Marschart chartData={chartData} />
         </div>
 
         {/* Cards Section: Show weather data for different sols */}
