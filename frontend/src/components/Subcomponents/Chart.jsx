@@ -5,7 +5,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 // Registering the chart components for Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const Marschart = ({ chartData }) => {
+const Chart = ({ chartData }) => {
   return (
     <div className="w-full md:w-1/2 mt-8 md:mt-0">
       <div className="w-full h-[400px]">  {/* Set height explicitly to ensure proper resizing */}
@@ -40,4 +40,4 @@ const Marschart = ({ chartData }) => {
   );
 };
 
-export default Marschart;
+export default Chart;
