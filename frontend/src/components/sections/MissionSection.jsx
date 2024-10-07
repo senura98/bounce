@@ -1,7 +1,7 @@
 import MissionCard from "../Cards/MissionCard";
 import SectionHeader from "../subcomponents/SectionHeader"; 
-import backgroundImage from '../assets/satellite.jpg'; 
-import marsbackgroundImage from '../assets/mars.jpg'; 
+import backgroundImage from '../../assets/satellite.jpg'; 
+import marsbackgroundImage from '../../assets/mars.jpg'; 
 
 const MissionSection = () => (
   <section className="p-10">
