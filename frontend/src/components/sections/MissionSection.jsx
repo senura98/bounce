@@ -1,4 +1,4 @@
-import MissionCard from "../cards/MissionCard";
+import MissionCard from "../Cards/MissionCard";
 import SectionHeader from "../subcomponents/SectionHeader"; 
 import backgroundImage from '../assets/satellite.jpg'; 
 import marsbackgroundImage from '../assets/mars.jpg'; 

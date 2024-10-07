@@ -1,5 +1,5 @@
 import React from 'react';
-import InfoCard from '../cards/Infocard.jsx'; 
+import InfoCard from '../Cards/InfoCard.jsx'; 
 import SectionHeader from '../subcomponents/SectionHeader.jsx';  
 
 const InfoSection = () => {
